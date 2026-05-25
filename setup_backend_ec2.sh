@@ -4,8 +4,8 @@ set -e
 echo "Starting Native Backend Setup for NutriTrack..."
 
 # 1. Update OS and Install Dependencies
-sudo dnf update -y
-sudo dnf install -y python3 python3-pip python3-devel gcc postgresql15-devel git
+sudo apt-get update -y
+sudo apt-get install -y python3 python3-pip python3-dev python3-venv gcc libpq-dev git
 
 # 2. Setup Application Directory
 echo "Setting up backend application directory..."
@@ -14,7 +14,7 @@ sudo mkdir -p /etc/nutritrack
 
 # Assuming this script is run from the project root (nutritrack)
 sudo cp -r backend/* /opt/nutritrack-backend/
-sudo chown -R ec2-user:ec2-user /opt/nutritrack-backend
+sudo chown -R ubuntu:ubuntu /opt/nutritrack-backend
 
 # 3. Create Python Virtual Environment and Install Dependencies
 echo "Installing Python dependencies..."
@@ -46,8 +46,8 @@ Description=NutriTrack Backend API (Uvicorn)
 After=network.target
 
 [Service]
-User=ec2-user
-Group=ec2-user
+User=ubuntu
+Group=ubuntu
 WorkingDirectory=/opt/nutritrack-backend
 EnvironmentFile=/etc/nutritrack/.env
 ExecStart=/opt/nutritrack-backend/venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000

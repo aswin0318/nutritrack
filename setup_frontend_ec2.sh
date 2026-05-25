@@ -4,8 +4,8 @@ set -e
 echo "Starting Native Frontend Setup for NutriTrack..."
 
 # 1. Update OS and Install Dependencies
-sudo dnf update -y
-sudo dnf install -y nginx nodejs npm git
+sudo apt-get update -y
+sudo apt-get install -y nginx nodejs npm git
 
 # 2. Build the Frontend
 echo "Building Frontend..."
@@ -63,6 +63,7 @@ EOF
 
 # Remove default nginx config to avoid port 80 conflict
 sudo rm -f /etc/nginx/conf.d/default.conf || true
+sudo rm -f /etc/nginx/sites-enabled/default || true
 
 # 5. Enable Nginx
 sudo systemctl enable nginx
