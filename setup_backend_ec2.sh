@@ -5,7 +5,10 @@ echo "Starting Native Backend Setup for NutriTrack..."
 
 # 1. Update OS and Install Dependencies
 sudo apt-get update -y
-sudo apt-get install -y python3 python3-pip python3-dev python3-venv gcc libpq-dev git
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa -y
+sudo apt-get update -y
+sudo apt-get install -y python3.12 python3.12-venv python3.12-dev gcc libpq-dev git
 
 # 2. Setup Application Directory
 echo "Setting up backend application directory..."
@@ -19,7 +22,7 @@ sudo chown -R ubuntu:ubuntu /opt/nutritrack-backend
 # 3. Create Python Virtual Environment and Install Dependencies
 echo "Installing Python dependencies..."
 cd /opt/nutritrack-backend
-python3 -m venv venv
+python3.12 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
 pip install -r requirements.txt
