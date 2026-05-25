@@ -21,7 +21,7 @@ class Notification(BaseModel):
     priority: Mapped[str] = mapped_column(String(20), nullable=False, default="normal")  # low, normal, high, urgent
     is_read: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
     action_url: Mapped[Optional[str]] = mapped_column(String(500), nullable=True)
-    metadata: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
+    meta_data: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
 
     # Foreign keys
     user_id: Mapped[uuid.UUID] = mapped_column(

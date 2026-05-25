@@ -23,7 +23,7 @@ class ActivityLog(BaseModel):
     duration_minutes: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     calories_burned: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     notes: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
-    metadata: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
+    meta_data: Mapped[Optional[dict]] = mapped_column(JSONB, nullable=True)
     points_earned: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
 
     # Foreign keys
