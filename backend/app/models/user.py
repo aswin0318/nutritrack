@@ -91,7 +91,7 @@ class User(BaseModel, SoftDeleteMixin):
 
     # Relationships
     organization = relationship("Organization", back_populates="users")
-    department = relationship("Department", back_populates="users")
+    department = relationship("Department", back_populates="users", foreign_keys=[department_id])
     role = relationship("Role", back_populates="users")
     activities = relationship("ActivityLog", back_populates="user", lazy="selectin")
     wellness_goals = relationship("WellnessGoal", back_populates="user", lazy="selectin")
