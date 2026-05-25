@@ -5,10 +5,7 @@ echo "Starting Native Backend Setup for NutriTrack..."
 
 # 1. Update OS and Install Dependencies
 sudo apt-get update -y
-sudo apt-get install -y software-properties-common
-sudo add-apt-repository ppa:deadsnakes/ppa -y
-sudo apt-get update -y
-sudo apt-get install -y python3.12 python3.12-venv python3.12-dev gcc libpq-dev git
+sudo apt-get install -y curl gcc libpq-dev git
 
 # 2. Setup Application Directory
 echo "Setting up backend application directory..."
@@ -20,12 +17,19 @@ sudo cp -r backend/* /opt/nutritrack-backend/
 sudo chown -R ubuntu:ubuntu /opt/nutritrack-backend
 
 # 3. Create Python Virtual Environment and Install Dependencies
-echo "Installing Python dependencies..."
+echo "Installing Python dependencies with uv..."
 cd /opt/nutritrack-backend
-python3.12 -m venv venv
+
+# Install uv (astral's extremely fast python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+export PATH="$HOME/.local/bin:$PATH"
+
+# Create a venv with a standalone Python 3.12 (uv downloads it automatically)
+uv venv --python 3.12 venv
 source venv/bin/activate
-pip install --upgrade pip
-pip install -r requirements.txt
+
+# Install requirements (downloads pre-built 3.12 wheels instantly)
+uv pip install -r requirements.txt
 
 # 4. Setup Environment File Placeholder
 echo "Setting up .env placeholder..."
